@@ -3,11 +3,64 @@ const bellyData = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-clas
 
 
 // Trying it out a little more dynamically...
-// THIS IS THE BEST WORKING VERSION OF #2. 
-// QUESTION FOR KYLE: Should I be using Object.values function in this code? 
+// QUESTION: Should I be using Object.values function in this code? 
 
-d3.json(bellyData).then(function(data)
-{
+// d3.json(bellyData).then(function(data)
+// {
+//     let selID = data.samples.filter(object => object.id === "940")
+
+//     let selectID = selID[0]
+
+//     console.log(selectID)
+
+//     let otuList = []
+//     for (let i = 0; i < 10; i++){
+//         otuList.push(`OTU ${selectID.otu_ids[i]}`)
+//     };
+
+//     let sampleValList = []
+//     for (let i = 0; i < 10; i++){
+//         sampleValList.push(selectID.sample_values[i])
+//     };
+
+//     let otuLabelList = []
+//     for (let i = 0; i < 10; i++){
+//         otuLabelList.push(selectID.otu_labels[i])
+//     };
+
+
+//     console.log(`OTU List: ${otuList}`)
+//     console.log(`Sample Value List: ${sampleValList}`)
+//     console.log(`OTU Labels: ${otuLabelList}`)
+
+//     let trace = {
+//         x: sampleValList.map(object => object).reverse(),
+//         y: otuList.map(object => object).reverse(),
+//         type: "bar",
+//         orientation: "h",
+//         hovertext: otuLabelList.map(object => object).reverse() // this isn't pulling in the otu labels...
+//     };
+
+//     let myData = [trace];
+
+//     let layout = {
+//         title: "OTU Frequency"
+//     };
+
+//     Plotly.newPlot("plot", myData, layout)
+
+// });
+
+
+
+
+
+
+function init(){
+
+    d3.json(bellyData).then(function(data)
+    {
+
     let selID = data.samples.filter(object => object.id === "940")
 
     let selectID = selID[0]
@@ -52,69 +105,74 @@ d3.json(bellyData).then(function(data)
 
 });
 
+}
+
+
+init();
 
 
 
-// GETTING CLOSER!!! 
 
+d3.json(bellyData).then(function(data){
+    
+    let idNames = Object.values(data.names)
+    console.log("ids", idNames);
 
-// d3.json(bellyData).then(function(data){
-//     let idNames = Object.values(data.names)
-//     console.log("ids", idNames);
+    d3.select("#selDataset").on("click", function(){    
+        let dropdown = d3.select("#selDataset")
+        let choice = dropdown.property("value");
+        console.log("selected option", choice)
 
-//     d3.select("#selDataset").on("click", function(){    
-//         let dropdown = d3.select("#selDataset")
-//         let choice = dropdown.property("value");
-//         console.log("selected option", choice)
-
-//         idNames.forEach(function(option) {
-//             dropdown.append("option").text(option)});
+        idNames.forEach(function(option) {
+            dropdown.append("option").text(option)});
     
 
-//         let selID = data.samples.filter(object => object.id === choice)
+        let selID = data.samples.filter(object => object.id === choice)
 
-//         let selectID = selID[0]
+        let selectID = selID[0]
         
-//         console.log(selectID)
+        console.log(selectID)
         
-//         let otuList = []
-//         for (let i = 0; i < 10; i++){
-//             otuList.push(`OTU ${selectID.otu_ids[i]}`)
-//         };
+        let otuList = []
+        for (let i = 0; i < 10; i++){
+            otuList.push(`OTU ${selectID.otu_ids[i]}`)
+        };
         
-//         let sampleValList = []
-//         for (let i = 0; i < 10; i++){
-//             sampleValList.push(selectID.sample_values[i])
-//         };
+        let sampleValList = []
+        for (let i = 0; i < 10; i++){
+            sampleValList.push(selectID.sample_values[i])
+        };
         
-//         let otuLabelList = []
-//         for (let i = 0; i < 10; i++){
-//             otuLabelList.push(selectID.otu_labels[i])
-//         };
+        let otuLabelList = []
+        for (let i = 0; i < 10; i++){
+            otuLabelList.push(selectID.otu_labels[i])
+        };
         
         
-//         // console.log(`OTU List: ${otuList}`)
-//         // console.log(`Sample Value List: ${sampleValList}`)
-//         // console.log(`OTU Labels: ${otuLabelList}`)
+        // console.log(`OTU List: ${otuList}`)
+        // console.log(`Sample Value List: ${sampleValList}`)
+        // console.log(`OTU Labels: ${otuLabelList}`)
         
-//         let trace = {
-//             x: sampleValList.map(object => object).reverse(),
-//             y: otuList.map(object => object).reverse(),
-//             type: "bar",
-//             orientation: "h",
-//             hovertext: otuLabelList.map(object => object).reverse() // this isn't pulling in the otu labels...
-//         };
+        let trace = {
+            x: sampleValList.map(object => object).reverse(),
+            y: otuList.map(object => object).reverse(),
+            type: "bar",
+            orientation: "h",
+            hovertext: otuLabelList.map(object => object).reverse() // this isn't pulling in the otu labels...
+        };
         
-//         let myData = [trace];
+        let myData = [trace];
         
-//         let layout = {
-//             title: "OTU Frequency"
-//         };
+        let layout = {
+            title: "OTU Frequency"
+        };
         
-//         Plotly.newPlot("plot", myData, layout)
-        
-//     });
-// });
+        Plotly.newPlot("plot", myData, layout)
+
+    });
+});
+
+
 
 
 
