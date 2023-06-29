@@ -1,60 +1,7 @@
 
 const bellyData = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json"
 
-
-// Trying it out a little more dynamically...
-// QUESTION: Should I be using Object.values function in this code? 
-
-// d3.json(bellyData).then(function(data)
-// {
-//     let selID = data.samples.filter(object => object.id === "940")
-
-//     let selectID = selID[0]
-
-//     console.log(selectID)
-
-//     let otuList = []
-//     for (let i = 0; i < 10; i++){
-//         otuList.push(`OTU ${selectID.otu_ids[i]}`)
-//     };
-
-//     let sampleValList = []
-//     for (let i = 0; i < 10; i++){
-//         sampleValList.push(selectID.sample_values[i])
-//     };
-
-//     let otuLabelList = []
-//     for (let i = 0; i < 10; i++){
-//         otuLabelList.push(selectID.otu_labels[i])
-//     };
-
-
-//     console.log(`OTU List: ${otuList}`)
-//     console.log(`Sample Value List: ${sampleValList}`)
-//     console.log(`OTU Labels: ${otuLabelList}`)
-
-//     let trace = {
-//         x: sampleValList.map(object => object).reverse(),
-//         y: otuList.map(object => object).reverse(),
-//         type: "bar",
-//         orientation: "h",
-//         hovertext: otuLabelList.map(object => object).reverse() // this isn't pulling in the otu labels...
-//     };
-
-//     let myData = [trace];
-
-//     let layout = {
-//         title: "OTU Frequency"
-//     };
-
-//     Plotly.newPlot("plot", myData, layout)
-
-// });
-
-
-
-
-
+// THIS INIT() FUNCTION AND THE D3 PART IS WORKING, BUT I'D LIKE TO GET IT INTO A FUNCTION FORM INSTEAD. 
 
 function init(){
 
@@ -63,9 +10,11 @@ function init(){
 
     let selID = data.samples.filter(object => object.id === "940")
 
+    console.log("What is selID?", selID)
+
     let selectID = selID[0]
 
-    console.log(selectID)
+    console.log("This is now selectID", selectID)
 
     let otuList = []
     for (let i = 0; i < 10; i++){
