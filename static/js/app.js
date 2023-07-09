@@ -107,11 +107,16 @@ function bubbleChart(sample){
 
         console.log("y-axis", sample_values)
 
+        let otu_labels = selectID.otu_labels
+
+        console.log("otu labels", otu_labels)
+
         var desired_maximum_marker_size = 40;
 
         var trace1 = {
         x: otuIDs,
         y: sample_values,
+        text: otu_labels,
         mode: 'markers',
         marker: {
           size: sample_values,
@@ -124,14 +129,15 @@ function bubbleChart(sample){
       var layout = {
         // title: 'Marker Size',
         showlegend: false,
-        // height: 600,
-        // width: 600,
+        height: 600,
+        width: 1200,
         xaxis: {
             title: "OTU ID"
         },
         yaxis: {
             title: "Sample Value"
-        }
+        },
+        hovermode: 'closest'
       };
       
       Plotly.newPlot("bubble", myData, layout);
@@ -141,18 +147,6 @@ function bubbleChart(sample){
     });
 };
 
-
-
-// For the metadata, need to display each key-value pair: 
-// {
-//     "id": 940,
-//     "ethnicity": "Caucasian",
-//     "gender": "F",
-//     "age": 24.0,
-//     "location": "Beaufort/NC",
-//     "bbtype": "I",
-//     "wfreq": 2.0
-// }
 
 
 // Populating the metadata. 
@@ -178,31 +172,7 @@ function metadata(sample){
             return `${d[0]}: ${d[1]}`
         })
 
-        console.log(demographics)
-
-        // let demoKeys = Object.keys(selectID)
-
-        // let demoValues = Object.values(selectID)
-        
-        // console.log("object keys", demoKeys)
-        // console.log("object values", demoValues)
-        
-        // // Doing this all manually -- need to make this more dynamic...
-        // let demoInfo = document.getElementById("sample-metadata");
-        // demoInfo.innerHTML = `${demoKeys[0]}: ${demoValues[0]} <br> ${demoKeys[1]}: ${demoValues[1]}` 
-
-        // var Metadata=data.metadata;
-        // Metadata.forEach(person => {
-        //     if (person.id ==value){
-        //         var demographics = Object.entries(person);
-        //         wash = demographics[6][1];
-        //         d3.selectAll('p').remove();
-        //         d3.select('#sample-metadata').selectAll('p').data(demographics).enter().append('p').text(d=>{
-        //             return `${d[0]}: ${d[1]}`;
-        //         });
-        //     }
-        // });
-
+        // console.log(demographics)
 
     }
 )};
